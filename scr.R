@@ -25,6 +25,36 @@ hist(vehicle$Year, main = "Manufactured Year", xlab = "Year", ylab = "Number of 
 summary(vehicle$Kilometer)
 
 ggplot(vehicle, aes(x = Kilometer)) +
-  geom_histogram(binwidth = 10000, fill = "orange", color = "black") +
+  geom_histogram(binwidth = 10000) +
   labs(title = "Kilometer Readings Distribution", x = "Kilometers Driven", y = "Frequency") +
   xlim(0,1000000) 
+
+# Create a box plot for price distribution by car model for the top 5 makes
+boxplot(Price ~ Make, data = vehicle_filtered, 
+        main = "Price Distribution by Car Model (Top 5 Makes)",
+        xlab = "Car Model", ylab = "Price",
+        col = "green")
+
+ggplot(vehicle_filtered, aes(x = Make, y = Price)) +
+  geom_boxplot(fill = "green") +
+  ylim(0, 2500000) +  
+  labs(title = "Price Distribution by Car Make", x = "Car Make", y = "Price")
+
+library(ggplot2)
+
+# Filter the 'vehicle' dataset for years from 2015 to 2022
+filtered_vehicle <- subset(vehicle, Year >= 2015 & Year <= 2022)
+
+ggplot(filtered_vehicle, aes(x = as.factor(Year), y = Price)) +
+  geom_boxplot(fill = "green") +
+  ylim(0, 2500000) +  
+  labs(title = "Price Distribution by Car Year (2015-2022)", x = "Car Year", y = "Price")
+
+library(ggplot2)
+
+ggplot(vehicle, aes(x = Kilometer, y = Price)) +
+  geom_point(color = "blue") +
+  xlim(0, 250000) +
+  labs(title = "Kilometers Driven vs. Price", x = "Kilometers Driven", y = "Price")
+
+
